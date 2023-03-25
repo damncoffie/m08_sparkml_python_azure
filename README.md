@@ -1,10 +1,18 @@
-* Deploy infrastructure with terraform
+* Deploy infrastructure with terraform:
 ```
 terraform init
-terraform plan -out terraform.plan
-terraform apply terraform.plan
-....
+terraform apply
+```
+* Open Azure Portal, navigate to "All resources" tab and select Azure Databricks Service
+* Import `ML End-to-End Example.dbc` file as Notebook
+* Change next properties:
+    * cmd 34: `rstate=np.random.RandomState(123)` -> `rstate=np.random.default_rng(123)`
+    * cmd 46: `table_path = "dbfs:/<your-value-here>/delta/wine_data"`
+* Execute all the steps from "ML End-to-End Example" notebook
+* Check results and destroy infrastructure with:
+```
 terraform destroy
 ```
-* Copy notebook and data into Databricks cluster
-* Execute all the steps from "ML End-to-End Example" notebook
+
+In `notebooks/export` you can find exports(`.dbc`, `.html`, `.ipynb`, `.py`) from executed notebook.
+In `notebooks/screenshots` you can find run-related images.
